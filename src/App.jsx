@@ -1,16 +1,19 @@
 import { lazy } from "solid-js";
-import { Router,Route } from 'solid-app-router';
-const Cart = lazy(() => import("./routes/Cart"));
+import { Routes,Route } from 'solid-app-router';
+
+const Cart = lazy(() => import("./Cart"));
 const Home = lazy(() => import("./routes/Home"));
+const Products = lazy(() => import("./routes/Products"));
 
 function App() {
   return (
     <>
     <header>header here...</header>
-    <Router>
-      <Route path='/' element={<Home />} />
-      <Route path='/cart' element={<Cart />} />
-    </Router>
+    <Cart />
+    <Routes>
+      <Route path='/' element={Home}   />
+      <Route path='/products' element={Products}   />
+    </Routes>
     <footer>footer here..</footer>
     </>
   );
