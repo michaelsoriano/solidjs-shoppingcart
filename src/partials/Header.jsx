@@ -2,10 +2,13 @@ import logo from '../logo.svg';
 import { Link } from 'solid-app-router';
 import { Navbar, NavDropdown, Nav, Container } from 'solid-bootstrap';
 
+import { showCart, setShowCart } from '../App';
+
 function Header(){
 
-    function showCart(){
-        console.log('xx')
+    function showCartHandler(){
+        console.log('xx');
+        setShowCart(true);
     }
 
     return (
@@ -31,8 +34,7 @@ function Header(){
                 </NavDropdown>
                 </Nav>
                 <Nav>
-                <Nav.Link href="#deets">More deets</Nav.Link>
-                <Nav.Link eventKey={2} onClick={showCart}>Cart</Nav.Link>
+                <Nav.Link eventKey={2} onClick={showCartHandler}>Cart</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

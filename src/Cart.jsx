@@ -1,13 +1,6 @@
 import { Offcanvas } from "solid-bootstrap";
-import { createSignal, onMount } from "solid-js";
 
-let [showCart,setShowCart] = createSignal(false);
-
-
-export default function Cart(){  
-    onMount(() => {
-        // setShowCart(true);
-    });   
+export default function Cart({showCart, setShowCart}){  
     return (
         <>
         <Offcanvas
@@ -15,7 +8,7 @@ export default function Cart(){
             onHide={()=>{setShowCart(false)}}
             placement={'end'}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 Some text as placeholder. In real life you can have the
