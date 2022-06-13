@@ -3,19 +3,16 @@ import { createSignal, onMount } from "solid-js";
 
 let [showCart,setShowCart] = createSignal(false);
 
-const handleOpen = () => setShowCart(true);
-const handleClose = () => setShowCart(false);
-
 
 export default function Cart(){  
     onMount(() => {
-        setShowCart(true);
+        // setShowCart(true);
     });   
     return (
         <>
         <Offcanvas
             show={showCart()}
-            onHide={handleClose}
+            onHide={()=>{setShowCart(false)}}
             placement={'end'}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Offcanvas</Offcanvas.Title>

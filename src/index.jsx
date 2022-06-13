@@ -5,10 +5,8 @@ import { Router, Routes, Route } from 'solid-app-router';
 import App from './App';
 // const Cart = lazy(() => import("./routes/Cart"));
 
-render(() => 
-    ( <Router>
-        {/* <Routes>
-            <Route path='/cart' element={Cart} />
-        </Routes> */}
-        <App />
+render(
+    () => 
+        ( <Router>
+         <App />
        </Router> ), document.getElementById('root'));
