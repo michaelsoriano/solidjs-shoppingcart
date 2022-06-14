@@ -1,3 +1,11 @@
+import { Link } from "solid-app-router";
+import { For } from "solid-js";
+import { products } from "../App";
+
 export default function Products(){
-    return <h1>Product page here...</h1>
+    return (
+        <For each={products}>
+            {product => <h1><Link href={`/products/${product.slug}/`}>{product.name}</Link></h1>}
+        </For>
+    )
 }
