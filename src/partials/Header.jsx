@@ -2,14 +2,9 @@ import logo from '../logo.svg';
 import { Link } from 'solid-app-router';
 import { Navbar, NavDropdown, Nav, Container } from 'solid-bootstrap';
 
-import { showCart, setShowCart } from '../App';
+import { setShowCart } from '../App';
 
 function Header(){
-
-    function showCartHandler(){
-        console.log('xx');
-        setShowCart(true);
-    }
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -17,7 +12,7 @@ function Header(){
             <Navbar.Brand>
             <Link href='/' class="no-underline color-white">
                 <img class="mr-5" src={logo} width="30" height="28" alt="logo" />
-                SolidJS Shopping Cart
+                Shopping Demo
             </Link>            
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -34,7 +29,7 @@ function Header(){
                 </NavDropdown>
                 </Nav>
                 <Nav>
-                <Nav.Link eventKey={2} onClick={showCartHandler}>Cart</Nav.Link>
+                <Nav.Link onClick={setShowCart(true)}>Cart</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

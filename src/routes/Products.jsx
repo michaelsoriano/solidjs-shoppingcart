@@ -1,11 +1,13 @@
-import { Link } from "solid-app-router";
 import { For } from "solid-js";
 import { products } from "../App";
+import ProductTile from "../partials/ProductTile";
 
 export default function Products(){
     return (
-        <For each={products}>
-            {product => <h1><Link href={`/products/${product.slug}/`}>{product.name}</Link></h1>}
+        <div  class="d-flex flex-wrap w-100">
+        <For each={products}>            
+            {product => <ProductTile product={product} />}
         </For>
+        </div>
     )
 }
