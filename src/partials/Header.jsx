@@ -11,7 +11,7 @@ function Header(){
             <Container>
             <Navbar.Brand>
             <Link href='/' class="no-underline color-white">
-                <img class="mr-5" src={logo} width="30" height="28" alt="logo" />
+                <img class="me-2" src={logo} width="30" height="28" alt="logo" />
                 Shopping Demo
             </Link>            
             </Navbar.Brand>

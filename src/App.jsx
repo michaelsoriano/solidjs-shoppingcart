@@ -57,14 +57,12 @@ function App() {
     <div class="main-wrap">
     <Header />
     <Cart showCart={showCart} setShowCart={setShowCart} />
-    <Container>
-      
+    <Container class="inner-wrap">      
       <Routes>
         <Route path='/' element={<Home />}   />
         <Route path='/products' element={<Products />}   />
         <Route path="/products/:slug" element={<Product />} />
       </Routes>
-      
     </Container>
     <Footer />
     </div>
