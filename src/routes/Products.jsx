@@ -1,16 +1,20 @@
 import { For } from "solid-js";
 import { products } from "../App";
+import Filters from "../partials/Filters";
 import ProductTile from "../partials/ProductTile";
 
 export default function Products(){
     return (
-        <div class="products-page mb-5 mt-5">
-        <h1>Products</h1>
-        <div class="d-flex flex-wrap w-100 gap-5 mt-5">        
+        <div class="products-page mb-5 mt-5 row">
+        <h3 class="mb-5">Products</h3>
+        <div class="col-md-3">
+            <Filters />
+        </div>         
+        <div class="col-md-9 d-flex flex-wrap gap-4">        
         <For each={products}>            
             {product => <ProductTile product={product} /> }
-        </For>
-        </div>
+        </For>         
+        </div>       
         </div>
     )
 }

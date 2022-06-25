@@ -1,4 +1,5 @@
 import { useParams } from "solid-app-router"
+import { Container } from "solid-bootstrap";
 
 export default function Product(){
 
@@ -6,6 +7,8 @@ export default function Product(){
     console.log(params.slug);
 
     return (
-       <h1>single product {params.slug}</h1>
+        <Container class="inner-wrap">
+            <h1>single product {params.slug}</h1>
+        </Container>       
     )
 }

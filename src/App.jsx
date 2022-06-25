@@ -8,7 +8,7 @@ import Footer from "./partials/Footer";
 
 const Cart = lazy(() => import("./Cart"));
 const Product = lazy(() => import("./routes/Product"));
-const Home = lazy(() => import("./routes/Home"));
+ 
 const Products = lazy(() => import("./routes/Products"));
 
 export const [showCart,setShowCart] = createSignal(false);
@@ -19,11 +19,10 @@ function App() {
     <div class="main-wrap">
     <Header />
     <Cart showCart={showCart} setShowCart={setShowCart} />
-    <Container class="inner-wrap pb-5">      
+    <Container class="pb-5">      
       <Routes>
-        <Route path='/' element={<Home />}   />
-        <Route path='/products' element={<Products />}   />
-        <Route path="/products/:slug" element={<Product />} />
+        <Route path='/' element={<Products />}   />
+        <Route path="/:slug" element={<Product />} />
       </Routes>
     </Container>
     <Footer />

@@ -12,7 +12,7 @@ export default function ProductTile({product}){
                 <Card.Text class="lt-clamp-3">
                     {product.description}
                 </Card.Text>
-                <Button variant="primary" onclick={()=>{navigate(`/products/${product.slug}/`)}}>Details</Button>
+                <Button variant="primary" onclick={()=>{navigate(`/${product.slug}/`)}}>Details</Button>
             </Card.Body>
             </Card>             
          </Col>
