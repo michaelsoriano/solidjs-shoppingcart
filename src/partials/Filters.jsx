@@ -1,56 +1,72 @@
-import { createSignal, onMount } from "solid-js";
+import { createSignal, createEffect, onMount } from "solid-js";
 import { setProducts } from "../App";
 import { productList } from "../data/productList";
 export default function Filters(){
     
-    const [filters,setFilters] = createSignal([]);
+    const ALLPRODUCTS = productList.slice(); //making copy so doesnt mutate
+    const [filters,setFilters] = createSignal([]); 
     
     onMount(()=>{
         let filterList = [];
-        productList.forEach((product)=>{
+        ALLPRODUCTS.forEach((product)=>{
             product.category.forEach((cat)=>{
-                if(filterList.indexOf(cat) === -1){
-                    filterList.push(cat);
-                }
+                let found = filterList.some(function(el) {
+                    return el.name === cat;
+                });
+                if(!found){
+                    filterList.push({name:cat,checked:false});
+                }                
             })
-        })    
+        })     
         setFilters(filterList); 
     })
-    function filterChanged(evt){
-        let filteredProducts = []; 
 
-      
+    createEffect(() => {
+        // making a flat array so we don't have to loop for every product
+        // and use .includes instead.
+        let filterArr = []; 
+        filters().forEach((item)=>{
+            if(item.checked){
+                filterArr.push(item.name);
+            }
+        }) 
 
-        // setProducts(filteredProducts); THIS SETS THE PRODUCTS TO FILTERED.. NEED A WAY TO STORE ALL PRODS...
-        console.log(filteredProducts); 
-
-        if(evt.target.checked){
-            console.log(evt.target.value, ' is checked')    
-            productList.forEach((product)=>{
-                if(product.category.indexOf(evt.target.value) !== -1){
-                    filteredProducts.push(product);
-                }
-            })        
+        if(filterArr.length === 0){       
+            setProducts(ALLPRODUCTS);
         }else{
-            console.log(evt.target.value, ' is NOT checked')
-            productList.forEach((product)=>{
-                if(product.category.indexOf(evt.target.value) !== -1){
-                    filteredProducts.push(product);
+            let filteredProducts = ALLPRODUCTS.filter((item)=>{
+                let found = item.category.some((cat)=>{
+                    return filterArr.includes(cat);
+                });
+                if(found){
+                    return item;
                 }
             })
+            setProducts(filteredProducts);
         }
 
-        // setProducts(filteredProducts);
-
+    });
+    function filterChangeHandler(evt){
+        setFilters(
+            filters().map((item)=>{
+                return item.name === evt.target.value ? {...item,checked : evt.target.checked} : {...item}; 
+            })
+        );
+        return false;
     }
     return (
         <For each={filters()}>
-        {(filter)=>{                     
+        {(filter)=>{               
             return (
                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" value={filter} id={filter} onChange={filterChanged} />
-                <label class="form-check-label" for={filter}>
-                    {filter}
+                <input class="form-check-input" 
+                    type="checkbox" 
+                    value={filter.name} 
+                    id={filter.name} 
+                    checked={filter.checked} 
+                    onChange={filterChangeHandler} />
+                <label class="form-check-label" for={filter.name}>
+                    {filter.name}
                 </label>
                 </div>
             )
