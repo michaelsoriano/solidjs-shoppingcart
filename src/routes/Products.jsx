@@ -5,7 +5,7 @@ import ProductTile from "../partials/ProductTile";
 
 export default function Products(){
     return (
-        <div class="products-page mb-5 mt-5 row">
+        <div class="mb-5 mt-5 row">
         <h3 class="mb-5">Products</h3>
         <div class="col-md-3">
             <Filters />
