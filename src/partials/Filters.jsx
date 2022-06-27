@@ -1,5 +1,5 @@
 import { createSignal, createEffect, onMount } from "solid-js";
-import { setProducts } from "../App";
+import { setLoading, setProducts } from "../App";
 import { productList } from "../data/productList";
 export default function Filters(){
     
@@ -24,6 +24,7 @@ export default function Filters(){
     createEffect(() => {
         // making a flat array so we don't have to loop for every product
         // and use .includes instead.
+        setLoading(true);
         let filterArr = []; 
         filters().forEach((item)=>{
             if(item.checked){
@@ -45,6 +46,7 @@ export default function Filters(){
             setProducts(filteredProducts);
         }
 
+        setLoading(false);
     });
     function filterChangeHandler(evt){
         setFilters(
