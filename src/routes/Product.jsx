@@ -1,7 +1,8 @@
 import { useParams } from "solid-app-router"
 import { Button, Card, Col, Container, Form, FormLabel, Row } from "solid-bootstrap";
-import { createSignal, For, onMount } from "solid-js";
+import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
+import { setShowCart, showCart } from "../App";
 
 export default function Product(){
 
@@ -9,6 +10,7 @@ export default function Product(){
     const [ product, setProduct ] = createSignal({});
     const [ selectedSize, setSelectedSize ] = createSignal('');
     const [ quantity, setQuantity ] = createSignal(1);
+    const [ btnDisabled, setBtnDisabled ] = createSignal(true);
     const params = useParams();
 
     onMount(()=>{
@@ -22,12 +24,22 @@ export default function Product(){
         }        
     })
 
+    createEffect(()=>{
+        if(selectedSize() !== '' && quantity() !== ''){
+            setBtnDisabled(false);
+        }else{
+            setBtnDisabled(true);
+        }
+    })
+
     function addToCart(evt){
         console.log(evt.target.value);
         console.log(selectedSize());
         console.log(quantity());
+        setShowCart(true);
+        console.log(showCart());
     }
-    function changeHandler(evt){
+    function changeHandler(evt){         
         switch(evt.target.name){
             case 'size' :
                 setSelectedSize(evt.target.value);
@@ -61,7 +73,7 @@ export default function Product(){
                             size="sm" 
                             class="mb-4" 
                             name="size" 
-                            value={selectedSize} 
+                            value={selectedSize()} 
                             onChange={changeHandler}>
                         <option value=''>--</option>
                         <For each={product().sizes}>
@@ -75,7 +87,7 @@ export default function Product(){
                             size="sm" 
                             class="mb-4" 
                             name="quantity" 
-                            value={quantity}
+                            value={quantity()}
                             onChange={changeHandler}>
                             <option value='1'>1</option>
                             <option value='2'>2</option>
@@ -86,7 +98,8 @@ export default function Product(){
                         </Col>
                         
                     </Row>
-                    <Button 
+                    <Button
+                        disabled={btnDisabled()} 
                         variant="primary" 
                         value={product().id} 
                         onclick={addToCart}>Add to Cart</Button> 
