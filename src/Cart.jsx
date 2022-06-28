@@ -1,6 +1,14 @@
 import { Offcanvas } from "solid-bootstrap";
+import { createEffect, For } from "solid-js";
+import { cartItems } from "./App";
 
 export default function Cart({showCart, setShowCart}){  
+
+    createEffect(()=>{
+        console.log(cartItems);
+    })
+
+
     return (
         <>
         <Offcanvas
@@ -11,8 +19,11 @@ export default function Cart({showCart, setShowCart}){
                 <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Some text as placeholder. In real life you can have the
-                elements you have chosen. Like, text, images, lists, etc.
+                <For each={cartItems}>
+                    {(item)=>{
+                        return <h1>{item.id}</h1>
+                    }}
+                </For>
             </Offcanvas.Body>
             </Offcanvas>
         </>

@@ -2,7 +2,7 @@ import logo from '../logo.svg';
 import { Link } from 'solid-app-router';
 import { Navbar, NavDropdown, Nav, Container } from 'solid-bootstrap';
 
-import { setShowCart } from '../App';
+import { setShowCart, cartItems } from '../App';
 
 function Header(){
 
@@ -29,7 +29,7 @@ function Header(){
                 </NavDropdown>
                 </Nav>
                 <Nav>
-                <Nav.Link onClick={setShowCart(true)}>Cart</Nav.Link>
+                <Nav.Link onClick={setShowCart(true)}>Cart {cartItems.length}</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

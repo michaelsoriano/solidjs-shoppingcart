@@ -13,6 +13,7 @@ const Products = lazy(() => import("./routes/Products"));
 
 export const [loading,setLoading] = createSignal(false);
 export const [showCart,setShowCart] = createSignal(false);
+export const [cartItems,setCartItems] = createStore([]);
 export const [products,setProducts] = createStore(productList);
 
 function App() {

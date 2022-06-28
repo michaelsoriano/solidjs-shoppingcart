@@ -2,7 +2,7 @@ import { useParams } from "solid-app-router"
 import { Button, Card, Col, Container, Form, FormLabel, Row } from "solid-bootstrap";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
-import { setShowCart, showCart } from "../App";
+import { setCartItems, setShowCart } from "../App";
 
 export default function Product(){
 
@@ -33,11 +33,16 @@ export default function Product(){
     })
 
     function addToCart(evt){
-        console.log(evt.target.value);
-        console.log(selectedSize());
-        console.log(quantity());
+        // console.log(evt.target.value);
+        // console.log(selectedSize());
+        // console.log(quantity());        
+        let obj = {
+            ...product, 
+            size : selectedSize(),
+            quantity : quantity()
+        }
         setShowCart(true);
-        console.log(showCart());
+        setCartItems([obj]);
     }
     function changeHandler(evt){         
         switch(evt.target.name){
