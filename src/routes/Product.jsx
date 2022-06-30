@@ -1,4 +1,4 @@
-import { useParams } from "solid-app-router"
+import { Link, useParams } from "solid-app-router"
 import { Button, Card, Col, Container, Form, FormLabel, Row, Toast, ToastContainer } from "solid-bootstrap";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
@@ -104,10 +104,14 @@ export default function Product(){
                         
                     </Row>
                     <Button
+                        class="mb-1"
                         disabled={btnDisabled()} 
                         variant="primary" 
                         value={product().id} 
                         onclick={addToCart}>Add to Cart</Button> 
+                    <Row>
+                        <Link class="mt-2 mb-2" href="/"><a>Cancel</a></Link>
+                    </Row>                    
                 </Card.Body>
                 </Card> 
 
