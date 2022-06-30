@@ -1,6 +1,6 @@
 import { Offcanvas } from "solid-bootstrap";
 import { createEffect, For } from "solid-js";
-import { cartItems } from "./App";
+import { cartItems, showCart, setShowCart } from "./App";
 
 export default function Cart({showCart, setShowCart}){  
 

@@ -6,6 +6,7 @@ import { productList } from "./data/productList";
 import Header from "./partials/Header";
 import Footer from "./partials/Footer";
 import Loading from "./partials/Loading";
+import Alert from "./partials/Alert";
 
 const Cart = lazy(() => import("./Cart"));
 const Product = lazy(() => import("./routes/Product")); 
@@ -13,15 +14,17 @@ const Products = lazy(() => import("./routes/Products"));
 
 export const [loading,setLoading] = createSignal(false);
 export const [showCart,setShowCart] = createSignal(false);
+export const [ toastMessage, setToastMessage ] = createSignal(false);
 export const [cartItems,setCartItems] = createStore([]);
 export const [products,setProducts] = createStore(productList);
 
 function App() {
   return (
     <>
-    <Loading />
+    <Loading />    
     <div class="main-wrap">
     <Header />
+    <Alert />
     <Cart showCart={showCart} setShowCart={setShowCart} />
     <Container class="pb-5">      
       <Routes>

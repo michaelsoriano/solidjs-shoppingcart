@@ -29,7 +29,10 @@ function Header(){
                 </NavDropdown>
                 </Nav>
                 <Nav>
-                <Nav.Link onClick={setShowCart(true)}>Cart {cartItems.length}</Nav.Link>
+                <Nav.Link class="cart-link" onClick={setShowCart(true)}>Cart 
+                    { cartItems.length > 0 
+                    ? <span class="cart-item-indicator">{cartItems.length}</span> 
+                    : null }</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

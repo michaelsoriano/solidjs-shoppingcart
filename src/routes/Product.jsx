@@ -1,8 +1,8 @@
 import { useParams } from "solid-app-router"
-import { Button, Card, Col, Container, Form, FormLabel, Row } from "solid-bootstrap";
+import { Button, Card, Col, Container, Form, FormLabel, Row, Toast, ToastContainer } from "solid-bootstrap";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
-import { setCartItems, setShowCart } from "../App";
+import { setCartItems, setToastMessage } from "../App";
 
 export default function Product(){
 
@@ -41,7 +41,7 @@ export default function Product(){
             size : selectedSize(),
             quantity : quantity()
         }
-        setShowCart(true);
+        setToastMessage('Item added to cart');
         setCartItems([obj]);
     }
     function changeHandler(evt){         
@@ -56,7 +56,7 @@ export default function Product(){
     }    
 
     return (
-        <Container class="mb-5 mt-5 row inner-wrap">
+        <Container class="mb-5 mt-5 row inner-wrap">        
             <h3 class="mb-5">{product().name}</h3>            
             <Col lg="6">
                 <Card>
@@ -66,7 +66,7 @@ export default function Product(){
             <Col lg="6"> 
                 <Card>     
                 <Card.Body>
-                    <Card.Title>{product().name}</Card.Title>
+                    <Card.Title>Description</Card.Title>
                     <hr />
                     <Card.Text>
                         {product().description}
