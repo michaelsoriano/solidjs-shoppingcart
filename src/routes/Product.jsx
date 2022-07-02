@@ -2,7 +2,7 @@ import { Link, useParams } from "solid-app-router"
 import { Button, Card, Col, Container, Form, FormLabel, Row, Toast, ToastContainer } from "solid-bootstrap";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
-import { setCartItems, setToastMessage } from "../App";
+import { cartItems, setCartItems, setToastMessage } from "../App";
 
 export default function Product(){
 
@@ -32,17 +32,39 @@ export default function Product(){
         }
     })
 
-    function addToCart(evt){
-        // console.log(evt.target.value);
-        // console.log(selectedSize());
-        // console.log(quantity());        
-        let obj = {
-            ...product, 
+    function addToCart(){
+        let productToAdd ={
+             ...product(), 
             size : selectedSize(),
             quantity : quantity()
+        
+        }; 
+        let items = cartItems.slice();
+        let foundIndex, found;
+
+        found = items.filter((item,ind)=>{            
+            if(item.id === productToAdd.id 
+                && item.size === productToAdd.size){
+                    foundIndex = ind;
+                    return item
+                }
+        })
+
+        let msg = '';
+
+        if(found.length > 0){
+            msg = 'Item updated in cart';
+            found[0].size = selectedSize();
+            found[0].quantity = parseInt(quantity());
+            items.splice(foundIndex, 1, found[0]);
+        }else{
+            msg = 'Item added to cart';
+            productToAdd.size = selectedSize();
+            productToAdd.quantity = parseInt(quantity());
+            items.push(productToAdd);
         }
-        setToastMessage('Item added to cart');
-        setCartItems([obj]);
+        setCartItems(items);
+        setToastMessage(msg);
     }
     function changeHandler(evt){         
         switch(evt.target.name){
@@ -104,18 +126,14 @@ export default function Product(){
                         
                     </Row>
                     <Button
-                        class="mb-1"
+                        class="mb-3"
                         disabled={btnDisabled()} 
                         variant="primary" 
                         value={product().id} 
                         onclick={addToCart}>Add to Cart</Button> 
-                    <Row>
-                        <Link class="mt-2 mb-2" href="/"><a>Cancel</a></Link>
-                    </Row>                    
+                                       
                 </Card.Body>
-                </Card> 
-
-               
+                </Card>
             </Col>
         </Container>       
     )

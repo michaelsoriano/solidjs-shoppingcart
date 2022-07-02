@@ -5,7 +5,7 @@ import { cartItems, showCart, setShowCart } from "./App";
 export default function Cart({showCart, setShowCart}){  
 
     createEffect(()=>{
-        console.log(cartItems);
+        // console.log(cartItems);
     })
 
 
