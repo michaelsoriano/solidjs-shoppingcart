@@ -1,6 +1,6 @@
 import { Col, Offcanvas, Row } from "solid-bootstrap";
 import { createEffect, createSignal, For } from "solid-js";
-import { cartItems,setCartItems } from "./App";
+import { cartItems } from "./App";
 import { Image } from "solid-bootstrap";
 
 const [total, setTotal ] = createSignal(0);

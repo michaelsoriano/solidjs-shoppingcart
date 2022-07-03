@@ -34,8 +34,9 @@ Your app is ready to be deployed!
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
 
 ## Deploying to Vercel:
+
 https://vercel.com/guides/deploying-solid-with-vercel
 
 ## Demo URL:
 
-https://solidjs-shoppingcart-michaelsoriano.vercel.app/
+https://solidjs-shoppingcart.vercel.app/
