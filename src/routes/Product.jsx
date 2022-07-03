@@ -1,4 +1,4 @@
-import { Link, useParams } from "solid-app-router"
+import { useParams } from "solid-app-router"
 import { Button, Card, Col, Container, Form, FormLabel, Row, Toast, ToastContainer } from "solid-bootstrap";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { productList } from '../data/productList';
@@ -51,16 +51,20 @@ export default function Product(){
         })
 
         let msg = '';
-
         if(found.length > 0){
             msg = 'Item updated in cart';
-            found[0].size = selectedSize();
-            found[0].quantity = parseInt(quantity());
-            items.splice(foundIndex, 1, found[0]);
+            
+            let productToUpdate = {
+                ...found[0], 
+                quantity : productToAdd.quantity, 
+                subtotal : productToAdd.quantity * productToAdd.price
+            }
+            items.splice(foundIndex, 1, productToUpdate); 
         }else{
             msg = 'Item added to cart';
             productToAdd.size = selectedSize();
             productToAdd.quantity = parseInt(quantity());
+            productToAdd.subtotal = productToAdd.quantity * productToAdd.price;
             items.push(productToAdd);
         }
         setCartItems(items);
