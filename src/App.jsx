@@ -1,7 +1,7 @@
 import { lazy, createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Routes,Route } from 'solid-app-router';
-import { Container, Spinner } from "solid-bootstrap";
+import { Container } from "solid-bootstrap";
 import { productList } from "./data/productList";
 import Header from "./partials/Header";
 import Footer from "./partials/Footer";
@@ -25,7 +25,7 @@ function App() {
     <div class="main-wrap">
     <Header />
     <Alert />
-    <Cart showCart={showCart} setShowCart={setShowCart} />
+    <Cart />
     <Container class="pb-5">      
       <Routes>
         <Route path='/' element={<Products />}   />
