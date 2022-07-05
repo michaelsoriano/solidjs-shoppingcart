@@ -1,24 +1,57 @@
 import { Col, Offcanvas, Row } from "solid-bootstrap";
 import { createEffect, createSignal, For } from "solid-js";
-import { cartItems, showCart, setShowCart } from "./App";
+import { cartItems, setCartItems, showCart, setShowCart } from "./App";
 import { Image } from "solid-bootstrap";
 
 const [total, setTotal ] = createSignal(0);
 
 function CartItems(){
+    function removeItem(evt){
+        evt.preventDefault();
+        const index = parseInt(evt.target.value);    
+        let items = [...cartItems]; 
+        items.splice(index,1)
+        setCartItems(items);
+    }
+    function updateQuantity(evt,method){
+        evt.preventDefault();
+        const index = parseInt(evt.target.value);         
+        let temp = cartItems.map((item,i)=>{
+            if(index === i){
+                if(item.quantity === 1 && !method){
+                    return {...item};
+                }
+                const qty = method === 'add' ? item.quantity + 1 : item.quantity - 1;
+                const subtotal = item.price * qty;
+                return {
+                    ...item,
+                    quantity : qty, 
+                    subtotal : subtotal
+                }
+            }else{
+                return {...item};
+            }            
+        })
+        setCartItems(temp);     
+    }
     return  <>
         <For each={cartItems}>
-            {(product)=>{
+            {(product,ind)=>{
                 return (
-                    <Row class="mb-4">
+                    <Row class="mb-4 cart-item">
                         <Col xs="3">
                             <Image src={product.image} class='thumbnail' /> 
                         </Col>
                         <Col xs="9" class="cart-item-text">
-                            <h6>{product.name}</h6>
+                            <h6>{product.name} <button  value={ind()} onClick={evt=>removeItem(evt)}>x</button></h6>
                             <p><span>{product.size}</span></p>
                             <p class="price-row">
-                                <span>${product.price.toFixed(2)} (x{product.quantity})</span>
+                                <span>${product.price.toFixed(2)}</span>
+                                <span>
+                                 <button value={ind()} onClick={evt=>updateQuantity(evt,'add')}>+</button>
+                                 {product.quantity}
+                                 <button value={ind()} onClick={evt=>updateQuantity(evt,null)}>-</button>
+                                </span>
                                 <span>${product.subtotal.toFixed(2)}</span>
                             </p>
                         </Col>    
