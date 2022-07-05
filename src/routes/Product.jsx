@@ -63,7 +63,7 @@ export default function Product(){
         }else{
             msg = 'Item added to cart';
             productToAdd.size = selectedSize();
-            productToAdd.quantity = parseInt(quantity());
+            productToAdd.quantity = quantity();
             productToAdd.subtotal = productToAdd.quantity * productToAdd.price;
             items.push(productToAdd);
         }
@@ -76,7 +76,7 @@ export default function Product(){
                 setSelectedSize(evt.target.value);
             break;
             case 'quantity':
-                setQuantity(evt.target.value);
+                setQuantity(parseInt(evt.target.value));
             break;
         }
     }    
