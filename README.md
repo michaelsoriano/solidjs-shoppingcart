@@ -1,3 +1,12 @@
+# SolidJS Shopping Cart  
+
+Code for a Shopping Cart website using SolidJS framework. See the following tutorials:
+
+- [Let’s build a Shopping Cart website with SolidJS and Bootstrap – Part 1](https://michaelsoriano.com/lets-build-a-shopping-cart-website-with-solidjs-and-bootstrap-part-1/)
+- [Let’s build a Shopping Cart website with SolidJS and Bootstrap – Part 2](https://michaelsoriano.com/lets-build-a-shopping-cart-website-with-solidjs-and-bootstrap-part-2/)
+
+For demonstration purposes only. 
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
